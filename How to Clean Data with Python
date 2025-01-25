@@ -46,9 +46,6 @@ print(df1.value_counts())                                     RESULT:
                                                               ('Eggs', 2, 3, 1)	  1
                                                               ('Flour', 2, 1, 2)	1
                                                               ('Milk', 1, 2, 1)	  1
-  2. Explore the DataFrames using the other functions listed. Which DataFrame is “clean”, and ready for analysis? Create a variable named clean and set it equal to either 1 for df1 or 
-2 for df2, depending on which DataFrame is clean.
-//
 print(df2.head())                                             RESULT:
                                                                 Grocery Item	Recipe	        Number
                                                               0	Eggs	        Cake Recipe	    2
@@ -56,4 +53,9 @@ print(df2.head())                                             RESULT:
                                                               2	Flour	        Cake Recipe    	2
                                                               3	Eggs	        Pancake Recipe	3
                                                               4	Milk	        Pancake Recipe	2
+
+  2. Explore the DataFrames using the other functions listed. Which DataFrame is “clean”, and ready for analysis? Create a variable named clean and set it equal to either 1 for df1 or 
+2 for df2, depending on which DataFrame is clean.
+//
+clean=2
 
