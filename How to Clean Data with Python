@@ -14,4 +14,46 @@ print(students0)                                              RESULT:
 
                                       DIAGNOSE THE DATA
   1. We have provided two DataFrames, df1 and df2. Inspect both of these DataFrames using the functions listed above. Start by printing the .head() of both df1 and df2.
+GIVEN:
+import codecademylib3_seaborn
+import pandas as pd
+df1 = pd.read_csv("df1.csv")
+df2 = pd.read_csv("df2.csv")
 //
+print(df1.head())                                             RESULT:
+                                                                Grocery Item	Cake Recipe	Pancake Recipe	Cookie Recipe
+                                                              0	Eggs	        2	          3	              1
+                                                              1	Milk	        1	          2	              1
+                                                              2	Flour	        2	          1	              2
+print(df1.info())                                             RESULT:
+                                                              dtypes: int64(3), object(1)
+                                                              memory usage: 224.0+ bytes
+                                                              None
+print(df1.describe())                                         RESULT:
+                                                                    Cake Recipe	        Pancake Recipe	Cookie Recipe
+                                                              count	3.0	                3.0	            3.0
+                                                              mean	1.6666666666666667	2.0	            1.3333333333333333
+                                                              std	  0.5773502691896257	1.0	            0.5773502691896257
+                                                              min	  1.0	                1.0	            1.0
+                                                              25%	  1.5	                1.5	            1.0
+                                                              50%	  2.0	                2.0	            1.0
+                                                              75%	  2.0	                2.5	            1.5
+                                                              max	  2.0	                3.0	            2.0
+print(df1.columns)                                            RESULT:
+                                                              Index(['Grocery Item', 'Cake Recipe', 'Pancake Recipe', 'Cookie Recipe'], dtype='object')
+print(df1.value_counts())                                     RESULT:
+                                                              	                  0
+                                                              ('Eggs', 2, 3, 1)	  1
+                                                              ('Flour', 2, 1, 2)	1
+                                                              ('Milk', 1, 2, 1)	  1
+  2. Explore the DataFrames using the other functions listed. Which DataFrame is “clean”, and ready for analysis? Create a variable named clean and set it equal to either 1 for df1 or 
+2 for df2, depending on which DataFrame is clean.
+//
+print(df2.head())                                             RESULT:
+                                                                Grocery Item	Recipe	        Number
+                                                              0	Eggs	        Cake Recipe	    2
+                                                              1	Milk	        Cake Recipe	    1
+                                                              2	Flour	        Cake Recipe    	2
+                                                              3	Eggs	        Pancake Recipe	3
+                                                              4	Milk	        Pancake Recipe	2
+
