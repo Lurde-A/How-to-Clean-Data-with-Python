@@ -91,3 +91,31 @@ import pandas as pd
 from students import students
   8. Print out the columns of students.
 //
+print(students.columns)                                       RESULT:
+                                                              Index(['full_name', 'gender_age', 'fractions', 'probability', 'grade'], dtype='object')
+  9. There is a column for the scores on the fractions exam, and a column for the scores on the probabilities exam. We want to make each row an observation, so we want to transform this 
+table to look like:
+full_name	exam	score	gender_age	grade
+“First Student”	“Fractions”	score%	…	…
+“First Student”	“Probabilities”	score%	…	…
+“Second Student”	“Fractions”	score%	…	…
+“Second Student”	“Probabilities”	score%	…	…
+…	…	…		
+Use pd.melt() to create a new table (still called students) that follows this structure.
+//
+students = pd.melt(frame=students, id_vars=["full_name",'gender_age','grade'], value_vars=["fractions","probability"], value_name="score", var_name="exam")
+  10. Print the .head() and the .columns of students. Also, print out the .value_counts() of the column exam.
+//
+print(students.head())                                          RESULT:
+                                                                 full_name	        gender_age	grade	        exam	      score
+                                                              0	 Moses Kirckman	    M14	        11th grade	  fractions	  69%
+                                                              1	 Timofei Strowan	  M18	        11th grade	  fractions	  63%
+                                                              2	 Silvain Poll	      M18	        9th grade	    fractions	  69%
+                                                              3	 Lezley Pinxton     M18	        11th grade  	fractions	  nan
+                                                              4	 Bernadene Saunper	F17	        11th grade	  fractions  	72%
+print(students.columns)                                         RESULT:
+                                                                Index(['full_name', 'gender_age', 'grade', 'exam', 'score'], dtype='object')
+print(students.exam.value_counts())                             RESULT:
+                                                                	          exam
+                                                                fractions	  1000
+                                                                probability	1000
