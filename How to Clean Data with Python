@@ -119,3 +119,20 @@ print(students.exam.value_counts())                             RESULT:
                                                                 	          exam
                                                                 fractions	  1000
                                                                 probability	1000
+
+                                      DEALING WITH DUPLICATES
+GIVEN:
+import codecademylib3_seaborn
+import pandas as pd
+from students import students
+print(students)                                                 RESULT:
+                                                                 full_name	        gender_age	grade	        exam	      score
+                                                              0	 Moses Kirckman	    M14	        11th grade	  fractions	  69%
+                                                              1	 Timofei Strowan	  M18	        11th grade	  fractions	  63%
+                                                              2	 Silvain Poll	      M18	        9th grade	    fractions	  69%
+                                                              3	 Lezley Pinxton     M18	        11th grade  	fractions	  nan
+                                                              4	 Bernadene Saunper	F17	        11th grade	  fractions  	72%
+  11. It seems like in the data collection process, some rows may have been recorded twice. Use the .duplicated() function on the students DataFrame to make a Series object called 
+duplicates.
+//
+
