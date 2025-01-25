@@ -60,4 +60,34 @@ print(df2.head())                                             RESULT:
 clean=2
 
                                       DEALING WITH MULTIPLE FILES
-  3. 
+GIVEN:
+import codecademylib3_seaborn
+import pandas as pd
+import glob
+  3. We have 10 different files containing 100 students each. These files follow the naming structure: exams0.csv, exams1.csv, … up to exams9.csv. We are going to import each file using 
+pandas, and combine all of the entries into one DataFrame. First, create a variable called student_files and set it equal to the glob() of all of the csv files we want to import.
+//
+student_files = glob.glob('exams*.csv')
+  4. Create an empty list called df_list that will store all of the DataFrames we make from the files exams0.csv through exams9.csv.
+//
+df_list=[]
+  5. Loop through the filenames in student_files, and create a DataFrame from each file. Append this DataFrame to df_list.
+//
+for filename in student_files:
+  data = pd.read_csv(filename)
+  df_list.append(data)
+  6. Concatenate all of the DataFrames in df_list into one DataFrame called students.
+//
+students = pd.concat(df_list)
+  7. Print students and the length of students. Did we get all of them?
+//
+print(students)
+print(len(students))
+
+                                      RESHAPING YOUR DATA
+GIVEN:
+import codecademylib3_seaborn
+import pandas as pd
+from students import students
+  8. Print out the columns of students.
+//
