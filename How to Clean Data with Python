@@ -1,1 +1,17 @@
+                                      INTRODUCTION
+GIVEN:
+import codecademylib3
+import pandas as pd
+students0 = pd.read_csv("file0.csv")
+students1 = pd.read_csv("file1.csv")
+print(students0)                                              RESULT:
+                                                                Unnamed: 0	full_name	        gender_age	  Fractions	  Probability	  grade
+                                                              0	0	          Barrett Feragh	  M14	          76%	        72%	          9th grade
+                                                              1	1	          Llewellyn Keech	  M14	          83%	        87%	          12th grade
+                                                              2	2	          Delilah Sowthcote	F16	          90%	        79%	          10th grade
+                                                              3	3	          Terrell Geri	    M15	          80%        	86%          	11th grade
+                                                              4	4	          Gram Hallewell	  M14	          67%	        78%	          10th grade
 
+                                      DIAGNOSE THE DATA
+  1. We have provided two DataFrames, df1 and df2. Inspect both of these DataFrames using the functions listed above. Start by printing the .head() of both df1 and df2.
+//
