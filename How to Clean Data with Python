@@ -219,3 +219,35 @@ print(students)                                                 RESULT:
   21. The students’ names are stored in a column called full_name. We want to separate this data out into two new columns, first_name and last_name. First, let’s create a Series object 
 called name_split that splits the full_name by the " " character.
 //
+name_split = students['full_name'].str.split(' ')
+  22. Now, let’s create a column called first_name that takes the first item in name_split.
+//
+students['first_name'] = name_split.str.get(0)
+  23. Finally, let’s create a column called last_name that takes the second item in name_split.
+//
+students['last_name'] = name_split.str.get(1)
+  24. Print out the .head() of students to see how the DataFrame has changed.
+//
+print(students.head())                                          RESULT:
+                                                                 full_name	        exam	      score	  gender	age	  first_name	last_name
+                                                              0	 Moses Kirckman    	fractions	  69%	    M	      14	  Moses	      Kirckman
+                                                              1	 Timofei Strowan	  fractions	  63%    	M	      18	  Timofei	    Strowan
+                                                              2	 Silvain Poll      	fractions	  69%    	M	      18	  Silvain	    Poll
+                                                              3	 Lezley Pinxton    	fractions	  nan    	M	      18	  Lezley	    Pinxton
+                                                              4  Bernadene Saunper	fractions	  72%    	F	      17	  Bernadene	  Saunper
+students = students[['first_name', 'last_name', 'exam', 'score', 'gender', 'age']]
+print(students.head())                                          RESULT:
+                                                                 first_name	last_name  	exam	      score	  gender	age
+                                                              0	 Moses	    Kirckman	  fractions	  69%	    M	      14
+                                                              1	 Timofei	  Strowan	    fractions	  63%	    M	      18
+                                                              2	 Silvain	  Poll	      fractions	  69%	    M	      18
+                                                              3	 Lezley    	Pinxton	    fractions  	nan	    M	      18
+                                                              4	 Bernadene	Saunper	    fractions  	72%	    F	      17
+students = students[['first_name', 'last_name', 'exam', 'score', 'gender', 'age']]
+print(students.head())
+
+                                      LOOKING AT TYPES
+  25. Let’s inspect the dtypes in the students table. Print out the .dtypes attribute.
+//
+
+
