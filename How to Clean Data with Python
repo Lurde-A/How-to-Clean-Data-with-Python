@@ -249,5 +249,111 @@ print(students.head())
                                       LOOKING AT TYPES
   25. Let’s inspect the dtypes in the students table. Print out the .dtypes attribute.
 //
+print(students.dtypes)                                          RESULT:
+                                                                            0
+                                                              full_name    	object
+                                                              exam	        object
+                                                              score	        object
+                                                              gender	      object
+                                                              age	          object
+                                                              first_name	  object
+                                                              last_name	    object
+  26. If we wanted to make a scatterplot of age vs average exam score, would we be able to do it with this type of data? Try to print out the mean of the score column of students.
+//
+print(students.score.mean())                                   RESULT: ERROR
 
+                                      STRING PARSING
+  27. We saw in the last exercise that finding the mean of the score column is hard to do when the data is stored as Objects and not numbers. Use regex to take out the % signs in 
+the score column.
+//
+students.score = students['score'].replace('[\%]', '', regex=True)
+print(students.head())                                          RESULT:
+                                                                 full_name	        exam	      score	gender	age	  first_name	last_name
+                                                              0	 Moses Kirckman	    fractions	  69	  M	      14	  Moses	      Kirckman
+                                                              1	 Timofei Strowan	  fractions	  63	  M	      18	  Timofei	    Strowan
+                                                              2	 Silvain Poll	      fractions	  69	  M	      18	  Silvain	    Poll
+                                                              3	 Lezley Pinxton	    fractions	  nan	  M	      18	  Lezley	    Pinxton
+                                                              4	 Bernadene Saunper	fractions	  72	  F	      17	  Bernadene  	Saunper
+  28. Convert the score column to a numerical type using the pd.to_numeric() function.
+//
+students.score = pd.to_numeric(students.score)
+print(students.dtypes)                                          RESULT:
+                                                                            0
+                                                              full_name    	object
+                                                              exam	        object
+                                                              score	        float64
+                                                              gender	      object
+                                                              age	          object
+                                                              first_name  	object
+                                                              last_name	    object
 
+                                      MORE STRING PARSING
+  29. Print out the first five rows of the grade column.
+//
+print(students.grade.head())                                    RESULT:
+                                                                  grade
+                                                              0  	11th grade
+                                                              1	  11th grade
+                                                              2	  9th grade
+                                                              3	  11th grade
+                                                              4	  11th grade
+  30. Each value in grade looks like “9th grade”, “10th grade”, “11th grade”, or “12th grade”. We want to pare that down to just having the numerical grade. Maybe we want to do linear 
+regression on this data, which would require numerical inputs. Use regex to extract the number from each string in grade and store those values back into the grade column.
+//
+split_students = students['grade'].str.split('(\d+)', expand=True)
+print(split_students.head())                                    RESULT:
+                                                                  0	  1	    2
+                                                              0		    11	  th grade
+                                                              1		    11	  th grade
+                                                              2		    9	    th grade
+                                                              3		    11	  th grade
+                                                              4		    11	  th grade
+students.grade = pd.to_numeric(split_students[1])
+print(students.head())                                          RESULT:
+                                                                 full_name	        exam	      score	  gender	age	  grade	  first_name	last_name
+                                                              0  Moses Kirckman	    fractions  	69.0	  M	      14	  11	    Moses	      Kirckman
+                                                              1	 Timofei Strowan	  fractions  	63.0	  M	      18	  11	    Timofei	    Strowan
+                                                              2	 Silvain Poll      	fractions	  69.0	  M	      18	  9	      Silvain	    Poll
+                                                              3	 Lezley Pinxton    	fractions	  nan    	M	      18	  11	    Lezley	    Pinxton
+                                                              4	 Bernadene Saunper	fractions	  72.0  	F	      17	  11	    Bernadene	  Saunper
+  31. Print the dtypes of the students table.
+//
+print(students.dtypes)                                          RESULT:
+                                                                            0
+                                                              full_name	    object
+                                                              exam	        object
+                                                              score	        float64
+                                                              gender	      object
+                                                              age	          object
+                                                              grade	        int64
+                                                              first_name	  object
+                                                              last_name	    object
+  32. Convert the grade column to be numerical values instead of objects.
+//
+This line does that:
+students.grade = pd.to_numeric(split_students[1])
+  33. Calculate the mean of grade, store it in a variable called avg_grade, and then print it out! We could not have done this with strings like “9th grade” or “10th grade”.
+//
+avg_grade = students['grade'].mean()
+print(avg_grade)                                                RESULT: 10.620445344129555
+
+                                      MISSING VALUES
+  34. Get the mean of the score column. Store it in score_mean and print it out.
+//
+score_mean = students.score.mean()
+print(score_mean)                                               RESULT: 77.69657422512235
+  35. We will assume that everyone who doesn’t have a score for an exam missed the test. We want to replace all nans with a score of 0. Let’s do this with the score column.
+Fill all of the nans in students['score'] with 0.
+//
+students = students.fillna(value = {'score': 0})
+print(students.head())                                          RESULT:
+                                                                 full_name	        exam	      score	  gender	age	grade	first_name	last_name
+                                                              0	 Moses Kirckman	    fractions	  69.0	  M	      14	11	  Moses	      Kirckman
+                                                              1	 Timofei Strowan	  fractions	  63.0	  M	      18	11	  Timofei	    Strowan
+                                                              2	 Silvain Poll	      fractions	  69.0	  M	      18	9	    Silvain	    Poll
+                                                              3	 Lezley Pinxton	    fractions	  0      	M	      18	11	  Lezley	    Pinxton
+                                                              4	 Bernadene Saunper	fractions  	72.0	  F	      17	11	  Bernadene	  Saunper
+  36. Get the mean of the score column again. Store it in score_mean_2 and print it out.
+//
+score_mean_2 = students.score.mean()
+print(score_mean_2)                                             RESULT: 72.30971659919028
