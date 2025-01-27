@@ -92,5 +92,33 @@ print(us_census.head())                                      RESULT:
 2	2	          Arizona	    6641928	  29.565921052631502%	57.120000000000026%	3.8509868421052658%	4.35506578947368%  	  2.876578947368419%	0.16763157894736833%	54207.82095490716	3299088M_3342840F  	3299088	  3342840.0
 3	3	          Arkansas  	2958208	  6.215474452554738%	71.13781021897813%	18.968759124087573%	0.5229197080291965%	  1.1423357664233578%	0.14686131386861315%	41935.63396778917	1451913M_1506295F  	1451913	  1506295.0
 4	4	          California	38421464	37.291874687968054%	40.21578881677474%	5.677396405391911%	0.40529206190713685%	13.052234148776776%	0.35141038442336353%	67264.78230266465	19087135M_19334329F	19087135	19334329.0
-  ū. 
-
+  8. Now you should have the columns you need to make the graph and make sure your boss does not slam a ruler angrily on your desk because you’ve wasted your whole day cleaning your data 
+with no results to show! Use matplotlib to make a scatterplot!
+plt.scatter(the_women_column, the_income_column) 
+Remember to call plt.show() to see the graph!
+//
+plt.scatter(us_census.Women, us_census.Income)
+plt.show()
+  9. You want to double check your work. You know from experience that these monstrous csv files probably have nan values in them! Print out your column with the number of women per state 
+to see. We can fill in those nans by using pandas’ .fillna() function. You have the TotalPop per state, and you have the Men per state. As an estimate for the nan values in the Women 
+column, you could use the TotalPop of that state minus the Men for that state. Print out the Women column after filling the nan values to see if it worked!
+//
+us_census = us_census.fillna({'Women':us_census.TotalPop - us_census.Men})
+print(us_census.Women)                                RESULT: Did work. Women column was all filled up with population calculations.
+  10. We forgot to check for duplicates! Use .duplicated() on your census DataFrame to see if we have duplicate rows in there.
+//
+print(us_census.duplicated())                         RESULT: 
+                                                      	0
+                                                      0	False
+                                                      1	False
+                                                      2	False
+                                                      3	False
+                                                      4	False
+                                                      ...
+  11. Drop those duplicates using the .drop_duplicates() function.
+//
+us_census = us_census.drop_duplicates()
+  12. Make the scatterplot again. Now, it should be perfect! Your job is secure, for now.
+//
+plt.scatter(us_census.Women, us_census.Income)
+plt.show()
