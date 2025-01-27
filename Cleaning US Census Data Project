@@ -64,8 +64,16 @@ print(us_census.head())                                      RESULT:
 4	4	          California	38421464	37.291874687968054%	40.21578881677474%	5.677396405391911%	0.40529206190713685%	13.052234148776776%	0.35141038442336353%	67264.78230266465	  19087135M_19334329F
   6. Look at the GenderPop column. We are going to want to separate this into two columns, the Men column, and the Women column. Split the column into those two new columns using str.split 
 and separating out those results.
+  7. Convert both of the columns into numerical datatypes. There is still an M or an F character in each entry! We should remove those before we convert.
 //
-
+split_us_census = us_census['GenderPop'].str.split('(_+)', expand=True)
+print(split_us_census.head())
+split_us_census[0] = split_us_census[0].replace('[,M]', '', regex = True)
+split_us_census[2] = split_us_census[2].replace('[,F]', '', regex = True)
+print(split_us_census.head())
+us_census['Men'] = pd.to_numeric(split_us_census[0])
+us_census['Women'] = pd.to_numeric(split_us_census[2])
+print(us_census.head())
 
 
 
