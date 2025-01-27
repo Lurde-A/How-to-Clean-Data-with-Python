@@ -122,3 +122,11 @@ us_census = us_census.drop_duplicates()
 //
 plt.scatter(us_census.Women, us_census.Income)
 plt.show()
+  13. Now, your boss wants you to make a bunch of histograms out of the race data that you have. Look at the .columns again to see what the race categories are.
+//
+print(us_census.columns)                              RESULT:
+                                                      Index(['Unnamed: 0', 'State', 'TotalPop', 'Hispanic', 'White', 'Black', 'Native', 'Asian', 'Pacific', 'Income', 'GenderPop', 'Men', 
+                                                      'Women'], dtype='object')
+  14. Try to make a histogram for each one! You will have to get the columns into numerical format, and those percentage signs will have to go. Don’t forget to fill the nan values with 
+something that makes sense! You probably dropped the duplicate rows when making your last graph, but it couldn’t hurt to check for duplicates again.
+//
