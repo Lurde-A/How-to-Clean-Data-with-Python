@@ -132,7 +132,13 @@ something that makes sense! You probably dropped the duplicate rows when making 
 //
 for column in us_census.columns:
   us_census[column] = us_census[column].replace('[,%]', '', regex = True)
-print(us_census.head())
+print(us_census.head())                               RESULT:
+  Unnamed: 0	State	      TotalPop	Hispanic	          White	              Black	              Native	            Asian	              Pacific	            Income	          GenderPop	          Men	      Women
+0	0	          Alabama	    4830620  	3.7516156462584975	61.878656462585    	31.25297619047618  	0.4532312925170065	1.0502551020408146	0.03435374149659865	43296.35860306644	2341093M_2489527F	  2341093	  2489527.0
+1	1	          Alaska	    733375	  5.909580838323351	  60.910179640718574	2.8485029940119775	16.39101796407186  	5.450299401197604	  1.0586826347305378	70354.74390243902	384160M_349215F	    384160	  349215.0
+2	2	          Arizona	    6641928	  29.565921052631502	57.120000000000026	3.8509868421052658	4.35506578947368	  2.876578947368419	  0.16763157894736833	54207.82095490716	3299088M_3342840F	  3299088	  3342840.0
+3	3	          Arkansas  	2958208	  6.215474452554738  	71.13781021897813	  18.968759124087573	0.5229197080291965	1.1423357664233578	0.14686131386861315	41935.63396778917	1451913M_1506295F  	1451913	  1506295.0
+4	4	          California	38421464	37.291874687968054	40.21578881677474	  5.677396405391911	  0.40529206190713685	13.052234148776776	0.35141038442336353	67264.78230266465	19087135M_19334329F	19087135	19334329.0
 
 us_census.Hispanic = pd.to_numeric(us_census.Hispanic)
 us_census.White = pd.to_numeric(us_census.White)
@@ -141,19 +147,64 @@ us_census.Native = pd.to_numeric(us_census.Native)
 us_census.Asian = pd.to_numeric(us_census.Asian)
 us_census.Pacific = pd.to_numeric(us_census.Pacific)
 
-print(us_census.dtypes)
+print(us_census.dtypes)                               RESULT:
+                                                                  0
+                                                      Unnamed: 0	int64
+                                                      State	      object
+                                                      TotalPop	  int64
+                                                      Hispanic	  float64
+                                                      White      	float64
+                                                      Black      	float64
+                                                      Native	    float64
+                                                      Asian      	float64
+                                                      Pacific	    float64
+                                                      Income	    object
+                                                      GenderPop	  object
+                                                      Men	        int64
+                                                      Women	      float64
 
 #Dropping duplicates:
-print(us_census.State.duplicated())
-print(len(us_census))
+print(us_census.State.duplicated())                   RESULT:
+                                                        State
+                                                      0	False
+                                                      1	False
+                                                      2	False
+                                                      3	False
+                                                      4	False
+                                                      5	False
+                                                      0	True
+                                                      1	False
+                                                      ...
+print(len(us_census))                                 RESULT: 60
 us_census = us_census.drop_duplicates(subset=['State'])
-print(len(us_census))
-print(us_census)
+print(len(us_census))                                 RESULT: 51
+print(us_census)                                      RESULT:
+  Unnamed: 0	State	      TotalPop	Hispanic	          White	              Black	              Native	            Asian	              Pacific	            Income	            GenderPop	          Men      	Women
+0	0	          Alabama	    4830620	  3.7516156462584975	61.878656462585    	31.25297619047618  	0.4532312925170065	1.0502551020408146	0.03435374149659865	43296.35860306644  	2341093M_2489527F	  2341093	  2489527.0
+1	1	          Alaska	    733375	  5.909580838323351	  60.910179640718574	2.848502994011977  	16.39101796407186	  5.450299401197604  	1.0586826347305378	70354.74390243902  	384160M_349215F	    384160	  349215.0
+2	2	          Arizona	    6641928	  29.565921052631502	57.12000000000002  	3.8509868421052658	4.35506578947368	  2.876578947368419  	0.16763157894736833	54207.82095490716  	3299088M_3342840F	  3299088	  3342840.0
+3	3	          Arkansas	  2958208	  6.215474452554737  	71.13781021897813  	18.968759124087576	0.5229197080291965	1.1423357664233578	0.14686131386861315	41935.63396778917  	1451913M_1506295F	  1451913	  1506295.0
+4	4	          California	38421464	37.29187468796805  	40.21578881677474  	5.677396405391911	  0.4052920619071369	13.052234148776774	0.35141038442336353	67264.78230266465  	19087135M_19334329F	19087135	19334329.0
+5	5	          Colorado	  5278906	  20.784380032206077	69.89557165861504  	3.546376811594201	  0.5738325281803548	2.661996779388082	  nan	                64657.801787164906	2648667M_2630239F  	2648667  	2630239.0
 
 #Filling NA values:
-print(us_census.isna())
+print(us_census.isna())                               RESULT:
+                                                        Unnamed: 0	State	TotalPop	Hispanic	White	Black	Native	Asian	Pacific	Income	GenderPop	Men	  Women
+                                                      0	False	      False	False	    False	    False	False	False  	False	False  	False	  False	    False	False
+                                                      1	False	      False	False	    False	    False	False	False	  False	False	  False	  False	    False	False
+                                                      2	False	      False	False	    False	    False	False	False	  False	False	  False	  False	    False	False
+                                                      3	False	      False	False	    False	    False	False	False	  False	False	  False	  False	    False	False
+                                                      4	False	      False	False	    False	    False	False	False	  False	False	  False  	False	    False	False
+                                                      5	False	      False	False	    False	    False	False	False	  False	True	  False  	False	    False	False
 us_census = us_census.fillna(value={'Pacific': 100 - us_census.Hispanic - us_census.White - us_census.Black - us_census.Native - us_census.Asian})
-print(us_census)
+print(us_census)                                     RESULT:
+  Unnamed: 0	State	      TotalPop	Hispanic	          White	              Black	              Native	            Asian	              Pacific	            Income	            GenderPop	          Men      	Women
+0	0	          Alabama	    4830620	  3.7516156462584975	61.878656462585    	31.25297619047618  	0.4532312925170065	1.0502551020408146	0.03435374149659865	43296.35860306644  	2341093M_2489527F	  2341093	  2489527.0
+1	1	          Alaska	    733375	  5.909580838323351	  60.910179640718574	2.848502994011977  	16.39101796407186	  5.450299401197604  	1.0586826347305378	70354.74390243902  	384160M_349215F	    384160	  349215.0
+2	2	          Arizona	    6641928	  29.565921052631502	57.12000000000002  	3.8509868421052658	4.35506578947368	  2.876578947368419  	0.16763157894736833	54207.82095490716  	3299088M_3342840F	  3299088	  3342840.0
+3	3	          Arkansas	  2958208	  6.215474452554737  	71.13781021897813  	18.968759124087576	0.5229197080291965	1.1423357664233578	0.14686131386861315	41935.63396778917  	1451913M_1506295F	  1451913	  1506295.0
+4	4	          California	38421464	37.29187468796805  	40.21578881677474  	5.677396405391911	  0.4052920619071369	13.052234148776774	0.35141038442336353	67264.78230266465  	19087135M_19334329F	19087135	19334329.0
+5	5	          Colorado	  5278906	  20.784380032206077	69.89557165861504  	3.546376811594201	  0.5738325281803548	2.661996779388082	  2.537842190016249	  64657.801787164906	2648667M_2630239F  	2648667  	2630239.0
 
 plt.hist(us_census.Hispanic, bins=20)
 plt.title("Hispanic gender")
