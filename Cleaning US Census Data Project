@@ -130,3 +130,52 @@ print(us_census.columns)                              RESULT:
   14. Try to make a histogram for each one! You will have to get the columns into numerical format, and those percentage signs will have to go. Don’t forget to fill the nan values with 
 something that makes sense! You probably dropped the duplicate rows when making your last graph, but it couldn’t hurt to check for duplicates again.
 //
+for column in us_census.columns:
+  us_census[column] = us_census[column].replace('[,%]', '', regex = True)
+print(us_census.head())
+
+us_census.Hispanic = pd.to_numeric(us_census.Hispanic)
+us_census.White = pd.to_numeric(us_census.White)
+us_census.Black = pd.to_numeric(us_census.Black)
+us_census.Native = pd.to_numeric(us_census.Native)
+us_census.Asian = pd.to_numeric(us_census.Asian)
+us_census.Pacific = pd.to_numeric(us_census.Pacific)
+
+print(us_census.dtypes)
+
+#Dropping duplicates:
+print(us_census.State.duplicated())
+print(len(us_census))
+us_census = us_census.drop_duplicates(subset=['State'])
+print(len(us_census))
+print(us_census)
+
+#Filling NA values:
+print(us_census.isna())
+us_census = us_census.fillna(value={'Pacific': 100 - us_census.Hispanic - us_census.White - us_census.Black - us_census.Native - us_census.Asian})
+print(us_census)
+
+plt.hist(us_census.Hispanic, bins=20)
+plt.title("Hispanic gender")
+plt.show()
+plt.clf()
+plt.hist(us_census.White, bins=20)
+plt.title("White gender")
+plt.show()
+plt.clf()
+plt.hist(us_census.Black, bins=20)
+plt.title("Black gender")
+plt.show()
+plt.clf()
+plt.hist(us_census.Native, bins=20)
+plt.title("Native gender")
+plt.show()
+plt.clf()
+plt.hist(us_census.Asian, bins=20)
+plt.title("Asian gender")
+plt.show()
+plt.clf()
+plt.hist(us_census.Pacific, bins=20)
+plt.title("Pacific gender")
+plt.show()
+plt.clf()
